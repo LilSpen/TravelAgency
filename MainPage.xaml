@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppTravel.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="10">
+
+            <!-- Flight Finder Section -->
+            <Label Text="Flight Finder" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center"/>
+            <Grid ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Picker Grid.Column="0" x:Name="fromPicker" Title="From" HorizontalOptions="FillAndExpand"/>
+                <Picker Grid.Column="1" x:Name="toPicker" Title="To" HorizontalOptions="FillAndExpand"/>
+                <Picker Grid.Column="2" x:Name="dayPicker" Title="Day" HorizontalOptions="FillAndExpand"/>
+                <Button Grid.Column="3" Text="Find Flights" Clicked="FindFlightsClicked" HorizontalOptions="End"/>
+            </Grid>
+
+            <!-- Flights List -->
+            <ListView x:Name="flightsListView" ItemSelected="OnFlightSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Label Text="{Binding FlightNumber}" FontSize="Small"/>
+                                <Label Text=" -  " FontSize="Small"/>
+                                <Label Text="{Binding Airline}" FontSize="Small"/>
+                                <Label Text=" from  " FontSize="Small"/>
+                                <Label Text="{Binding DepartureAirport}" FontSize="Small"/>
+                                <Label Text=" to  " FontSize="Small"/>
+                                <Label Text="{Binding ArrivalAirport}" FontSize="Small"/>
+                                <Label Text=" on  " FontSize="Small"/>
+                                <Label Text="{Binding DayOfWeek}" FontSize="Small"/>
+                                <Label Text=" at  " FontSize="Small"/>
+                                <Label Text="{Binding DepartureTime}" FontSize="Small"/>
+                                <Label Text=", Seats Available:  " FontSize="Small"/>
+                                <Label Text="{Binding SeatsAvailable}" FontSize="Small"/>
+                                <Label Text=", Price: $ " FontSize="Small"/>
+                                <Label Text="{Binding Price}" FontSize="Small"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label x:Name="noFlightsFoundLabel" Text="No flights found" IsVisible="False" HorizontalOptions="Center" TextColor="Red"/>
+
+
+
+            <!-- Reservation Section -->
+            <Label Text="Reserve" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center"/>
+            <Entry x:Name="reserveFlightCodeEntry" Placeholder="Flight Code" IsEnabled="False"/>
+            <Entry x:Name="reserveAirlineEntry" Placeholder="Airline" IsEnabled="False"/>
+            <Entry x:Name="reserveDayEntry" Placeholder="Day" IsEnabled="False"/>
+            <Entry x:Name="reserveTimeEntry" Placeholder="Time" IsEnabled="False"/>
+            <Entry x:Name="reserveCostEntry" Placeholder="Cost" IsEnabled="False"/>
+            <Entry x:Name="nameEntry" Placeholder="Name"/>
+            <Entry x:Name="citizenshipEntry" Placeholder="Citizenship"/>
+            <Button Text="Reserve" Clicked="ReserveFlightClicked"/>
+            <Label x:Name="reservationCodeLabel" Text="Reservation Code: " HorizontalOptions="Center"/>
+
+            <!-- Search Section -->
+            <Label Text="Search" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center"/>
+            <Entry x:Name="searchCodeEntry" Placeholder="Code"/>
+            <Entry x:Name="searchAirlineEntry" Placeholder="Airline"/>
+            <Entry x:Name="searchNameEntry" Placeholder="Name"/>
+            <Button Text="Find Reservations" Clicked="FindReservationsClicked"/>
+
+            <!-- Reservations List Section -->
+            <Label Text="Reservations" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center"/>
+            <ListView x:Name="reservationsListView" ItemSelected="OnReservationSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="5">
+                                <Label Text="{Binding ReservationCode}" FontSize="Small"/>
+                                <Label Text=" - " FontSize="Small"/>
+                                <Label Text="{Binding Airline}" FontSize="Small"/>
+                                <Label Text=" - " FontSize="Small"/>
+                                <Label Text="{Binding TravelerName}" FontSize="Small"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
